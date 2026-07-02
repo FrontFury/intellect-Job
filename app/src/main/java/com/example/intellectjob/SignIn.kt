@@ -1,15 +1,41 @@
 package com.example.intellectjob
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.intellectjob.databinding.ActivitySignInBinding
+import com.example.intellectjob.databinding.ActivitySplashViewBinding
 
 class SignIn : AppCompatActivity() {
+    private lateinit var binding: ActivitySignInBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_sign_in)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.tvBackToSignUp.setOnClickListener {
+            val intent = Intent(this@SignIn, SignUp::class.java)
+            startActivity(intent)
+        }
+
+        // Handle Log In Button Click and Extract Data
+        binding.btnLogin.setOnClickListener {
+
+            val phone = binding.etPhone.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
+
+            if (phone.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Phone: $phone", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
     }
 }
