@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +32,18 @@ class SignUp : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        sharedPreferences = getSharedPreferences("MyPrefs",MODE_PRIVATE)
+        val savedName = sharedPreferences.getString("username", null)
+
+        if (savedName != null) {
+            Toast.makeText(this, "Data exist", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@SignUp, HomePage::class.java))
+            finish()
+        }
+
+        binding.etSignUpName.setText(savedName)
+
+
 
         binding.btnRegister.setOnClickListener {
             val name = binding.etSignUpName.text.toString().trim()
@@ -37,13 +51,7 @@ class SignUp : AppCompatActivity() {
             val password = binding.etSignUpPassword.text.toString().trim()
             val confirmPassword = binding.etConfirSignUpPassword.text.toString().trim()
             val passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{6,}$".toRegex()
-            sharedPreferences = getSharedPreferences("MyPrefs",MODE_PRIVATE)
-            val savedName = sharedPreferences.getString("username", null)
-            if (savedName != null) {
-                Toast.makeText(this, "Data exist", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this@SignUp, HomePage::class.java))
-                finish()
-            }
+
 
             if (name.isEmpty() || phone.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this, "Please complete your details", Toast.LENGTH_SHORT).show()
@@ -66,7 +74,6 @@ class SignUp : AppCompatActivity() {
                     }
                 }
             }
-
 
         }
 
