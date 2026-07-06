@@ -14,23 +14,20 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Logo -->
         <ImageView
             android:id="@+id/imgLogo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:src="@drawable/profilelogo"
 />
-
-        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Recruiter Sign Up"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="#5D3F3F"
+            android:textColor="#5B3294"
             android:layout_marginTop="16dp"/>
 
         <TextView
@@ -41,11 +38,8 @@
             android:textColor="#777777"
             android:layout_marginBottom="20dp"/>
 
-        <!-- Company Name -->
-
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Company Name"
             app:boxStrokeColor="#5D3F3F"
@@ -57,8 +51,6 @@
                 android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Recruiter Name -->
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -75,8 +67,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Email -->
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,8 +82,6 @@
                 android:inputType="textEmailAddress"/>
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Phone -->
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -112,13 +100,11 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Website -->
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:hint="Company Website"
+            android:hint="@string/company_website"
             app:boxStrokeColor="#5D3F3F"
             app:startIconDrawable="@drawable/ic_web">
 
@@ -129,8 +115,6 @@
                 android:inputType="textUri"/>
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Password -->
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -149,7 +133,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Confirm Password -->
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -168,8 +151,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Terms -->
-
         <CheckBox
             android:id="@+id/cbTerms"
             android:layout_width="wrap_content"
@@ -178,8 +159,6 @@
             android:text="I agree to the Terms &amp; Conditions"
             android:textColor="#555555"
             android:buttonTint="#5D3F3F"/>
-
-        <!-- Button -->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCreateRecruiter"
@@ -191,10 +170,8 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
-            app:backgroundTint="#5D3F3F"
+            app:backgroundTint="#5B3294"
             app:cornerRadius="14dp"/>
-
-        <!-- Sign In -->
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -215,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:text=" Sign In"
                 android:textStyle="bold"
-                android:textColor="#5D3F3F"/>
+                android:textColor="#5B3294"/>
 
         </LinearLayout>
 
