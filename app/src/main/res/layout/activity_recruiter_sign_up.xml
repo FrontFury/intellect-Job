@@ -14,13 +14,6 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <ImageView
-            android:id="@+id/imgLogo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:src="@drawable/profilelogo"
-/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
