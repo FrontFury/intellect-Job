@@ -203,7 +203,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Application Deadline"
-            app:endIconDrawable="@drawable/ic_calendar"
             >
 
             <com.google.android.material.textfield.TextInputEditText

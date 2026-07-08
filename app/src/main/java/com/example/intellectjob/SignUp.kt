@@ -32,16 +32,16 @@ class SignUp : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        sharedPreferences = getSharedPreferences("MyPrefs",MODE_PRIVATE)
-        val savedName = sharedPreferences.getString("username", null)
-
-        if (savedName != null) {
-            Toast.makeText(this, "Data exist", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this@SignUp, HomePage::class.java))
-            finish()
-        }
-
-        binding.etSignUpName.setText(savedName)
+//        sharedPreferences = getSharedPreferences("MyPrefs",MODE_PRIVATE)
+//        val savedName = sharedPreferences.getString("username", null)
+//
+//        if (savedName != null) {
+//            Toast.makeText(this, "Data exist", Toast.LENGTH_SHORT).show()
+//            startActivity(Intent(this@SignUp, HomePage::class.java))
+//            finish()
+//        }
+//
+//        binding.etSignUpName.setText(savedName)
 
 
 

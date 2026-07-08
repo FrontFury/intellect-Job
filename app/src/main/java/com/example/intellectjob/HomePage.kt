@@ -25,12 +25,12 @@ class HomePage : AppCompatActivity() {
         binding.tvHomeWelcome.text = "Welcome Mr. $intentName"
 
 
-        binding.tvHomeWelcome.text = "Hi Mr. $savedName"
+//        binding.tvHomeWelcome.text = "Hi Mr. $savedName"
         binding.btnLogout.setOnClickListener {
-            val editor = sharedPreferences.edit()
-            editor.clear()
-            editor.apply()
-            startActivity(Intent(this@HomePage, SignIn::class.java))
+            sharedPreferences.edit().clear().apply()
+
+            startActivity(Intent(this, SignIn::class.java))
+            finish()
         }
 
     }

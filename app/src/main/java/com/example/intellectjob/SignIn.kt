@@ -20,18 +20,23 @@ class SignIn : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        binding.tvBackToSignUp.setOnClickListener {
+//            val intent = Intent(this@SignIn, SignUp::class.java)
+//            startActivity(intent)
+//        }
+
         binding.tvBackToSignUp.setOnClickListener {
-            val intent = Intent(this@SignIn, SignUp::class.java)
+            val intent = Intent(this@SignIn, UserType::class.java)
             startActivity(intent)
         }
 
-        sharedPreferences = getSharedPreferences("MyPrefs",MODE_PRIVATE)
-        val savedName = sharedPreferences.getString("username", null)
-        if (savedName != null) {
-            Toast.makeText(this, "Data exist", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this@SignIn, HomePage::class.java))
-            finish()
-        }
+//        sharedPreferences = getSharedPreferences("MyPrefs",MODE_PRIVATE)
+//        val savedName = sharedPreferences.getString("username", null)
+//        if (savedName != null) {
+//            Toast.makeText(this, "Data exist", Toast.LENGTH_SHORT).show()
+//            startActivity(Intent(this@SignIn, HomePage::class.java))
+//            finish()
+//        }
 
         // Handle Log In Button Click and Extract Data
         binding.btnLogin.setOnClickListener {
