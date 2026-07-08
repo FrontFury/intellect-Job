@@ -38,6 +38,15 @@ class SignIn : AppCompatActivity() {
             finish()
         }
 
+        sharedPreferences = getSharedPreferences("MyCompanyPrefs",MODE_PRIVATE)
+        val savedCompanyName = sharedPreferences.getString("company_name", null)
+
+        if (savedCompanyName != null) {
+            Toast.makeText(this, "Data exist", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@SignIn, RecruiterHomePage::class.java))
+            finish()
+        }
+
         // Handle Log In Button Click and Extract Data
         binding.btnLogin.setOnClickListener {
 

@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.intellectjob.databinding.ActivityRecruiterHomePageBinding
+import getGreeting
+import java.util.Calendar
 
 class RecruiterHomePage : AppCompatActivity() {
     private  lateinit var binding: ActivityRecruiterHomePageBinding
@@ -23,10 +25,22 @@ class RecruiterHomePage : AppCompatActivity() {
             startActivity(intent)
         }
 
-        sharedPreferences = getSharedPreferences("MyPrefs",MODE_PRIVATE)
-        val savedName = sharedPreferences.getString("username", "No Name")
+        val greeting = getGreeting()
+        binding.tvRecruiterGreeting?.text = greeting
+
+        sharedPreferences = getSharedPreferences("MyCompanyPrefs",MODE_PRIVATE)
+        val savedCompanyName = sharedPreferences.getString("company_name", null)
 
         val intentCompanyName = intent.getStringExtra("companyName")
+
         binding.tvRecruiterCompanyName?.text = intentCompanyName
+        binding.tvRecruiterCompanyName?.text = savedCompanyName
+
+        binding.btnRecruiterLogout?.setOnClickListener {
+            sharedPreferences.edit().clear().apply()
+
+            startActivity(Intent(this@RecruiterHomePage, SignIn::class.java))
+            finish()
+        }
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://tools.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools1="http://schemas.android.com/tools"
     android:background="@color/bg_gray">
 
     <View
@@ -18,27 +18,27 @@
         android:id="@+id/tvHomeWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="50dp"
         android:text="Welcome to Home"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="24dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/btnLogout"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="50dp"
-        android:backgroundTint= "@color/black"
-        android:padding="6dp"
         android:layout_marginEnd="14dp"
+        android:backgroundTint="@color/black"
+        android:padding="6dp"
         android:src="@drawable/logout"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHomeWelcome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/tvHomeWelcome" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/welcomeText"
@@ -139,26 +139,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_button"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 android:text="💻 Tech &amp; IT"
-                android:background="@drawable/rounded_button"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="13sp"
-                android:textAllCaps="false"/>
+                android:textSize="13sp" />
 
             <Button
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_button"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
-                android:background="@drawable/rounded_button"
                 android:text="🎨 Design"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="13sp"
-                android:textAllCaps="false"/>
+                android:textSize="13sp" />
 
             <Button
                 style="?android:attr/borderlessButtonStyle"
@@ -168,9 +168,9 @@
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 android:text="📈 Marketing"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="13sp"
-                android:textAllCaps="false"/>
+                android:textSize="13sp" />
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -179,7 +179,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:text="Featured Jobs"
         android:textColor="@color/text_dark"
         android:textSize="16sp"
@@ -187,205 +187,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/categoriesScroll" />
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/featuredJob"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="vertical"
+        android:clipToPadding="false"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationMock"
-        app:layout_constraintTop_toBottomOf="@id/titleFeatured">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="2dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="14dp">
-
-                <TextView
-                    android:id="@+id/jobTitle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Senior Android Developer"
-                    android:textColor="@color/text_dark"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/company1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="TechCorp Inc. • Full-time"
-                    android:textColor="@color/text_muted"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/jobTitle1" />
-
-                <TextView
-                    android:id="@+id/salary1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="$90k - $120k / year"
-                    android:textColor="@color/purple_theme"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/company1" />
-
-                <Button
-                    android:id="@+id/applyBtn01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:background="@color/purple_theme"
-                    android:text="Apply"
-                    android:textColor="@color/white"
-                    android:textSize="11sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/salary1"
-                    app:layout_constraintVertical_bias="0.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            android:layout_marginBottom="10dp"
-            app:cardElevation="2dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="14dp">
-
-                <TextView
-                    android:id="@+id/jobTitle2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="UI/UX Product Designer"
-                    android:textColor="@color/text_dark"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/company2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Creative Studio • Remote"
-                    android:textColor="@color/text_muted"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/jobTitle2" />
-
-                <TextView
-                    android:id="@+id/salary2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="$70k - $85k / year"
-                    android:textColor="@color/purple_theme"
-                    android:textStyle="bold"
-                    android:textSize="13sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/company2" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:id="@+id/applyBtn02"
-                    android:layout_height="32dp"
-                    android:background="@color/purple_theme"
-                    android:text="Apply"
-                    android:textColor="@color/white"
-                    android:textSize="11sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/salary2" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-
-            app:cardElevation="2dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="14dp">
-
-
-                <TextView
-                    android:id="@+id/jobTitle3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Senior Software Developer"
-                    android:textColor="@color/text_dark"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/company3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Brain Station Inc. • Full-time"
-                    android:textColor="@color/text_muted"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/jobTitle3" />
-
-                <TextView
-                    android:id="@+id/salary3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="$80k - $100k / year"
-                    android:textColor="@color/purple_theme"
-                    android:textStyle="bold"
-                    android:textSize="13sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/company3" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:id="@+id/applyBtn03"
-                    android:layout_height="32dp"
-                    android:background="@color/purple_theme"
-                    android:text="Apply"
-                    android:textColor="@color/white"
-                    android:textSize="11sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/salary3" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-
-
-
-    </LinearLayout>
+        android:paddingBottom="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationMock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleFeatured"
+        tools1:listitem="@layout/item_job" />
 
     <LinearLayout
         android:id="@+id/bottomNavigationMock"
@@ -402,8 +218,8 @@
             android:layout_height="wrap_content"
             android:text="🏠 Home"
             android:textColor="@color/purple_theme"
-            android:textStyle="bold"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
