@@ -1,6 +1,8 @@
 package com.example.intellectjob
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -11,8 +13,13 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.intellectjob.databinding.ActivityRecruiterSignUpBinding
 import com.example.intellectjob.databinding.ActivityUserTypeBinding
 
+
+
 class RecruiterSignUp : AppCompatActivity() {
     private lateinit var binding: ActivityRecruiterSignUpBinding
+    private lateinit var sharedPreferences: SharedPreferences
+
+    @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,6 +30,18 @@ class RecruiterSignUp : AppCompatActivity() {
             val intent = Intent(this, SignIn::class.java)
             startActivity(intent)
         }
+
+        sharedPreferences = getSharedPreferences("MyCompanyPrefs",MODE_PRIVATE)
+        val savedCompanyName = sharedPreferences.getString("company_name", null)
+
+        if (savedCompanyName != null) {
+            Toast.makeText(this, "Data exist", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@RecruiterSignUp, RecruiterHomePage::class.java))
+            finish()
+        }
+
+        binding.etCompanyName.setText(savedCompanyName)
+
 
         binding.btnCreateRecruiter.setOnClickListener {
             val companyName = binding.etCompanyName.text.toString().trim()
@@ -47,7 +66,11 @@ class RecruiterSignUp : AppCompatActivity() {
                     }
                     else{
                         Toast.makeText(this, "Account Registered!", Toast.LENGTH_SHORT).show()
+                        sharedPreferences.edit {
+                            putString("company_name", companyName)
+                        }
                         val intent = Intent(this, RecruiterHomePage::class.java)
+                        intent.putExtra("companyName",companyName)
                         startActivity(intent)
                     }
                 }
