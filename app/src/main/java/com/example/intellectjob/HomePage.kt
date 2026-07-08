@@ -25,7 +25,7 @@ class HomePage : AppCompatActivity() {
         binding.tvHomeWelcome.text = "Welcome Mr. $intentName"
 
 
-//        binding.tvHomeWelcome.text = "Hi Mr. $savedName"
+        binding.tvHomeWelcome.text = "Hi Mr. $savedName"
         binding.btnLogout.setOnClickListener {
             sharedPreferences.edit().clear().apply()
 
