@@ -2,13 +2,13 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://tools.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
-    android:layout_marginBottom="6dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="3dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
     app:cardBackgroundColor="@android:color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,60 +16,110 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <!-- Company Logo Container -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardLogo"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#F3EEF9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvCompanyInitial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="🏢"
+                android:textSize="18sp" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Job Title -->
         <TextView
             android:id="@+id/tvJobTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Senior Android Developer"
-            android:textColor="@android:color/black"
+            android:textColor="#1A1A1A"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/btnApply"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnBookmark"
+            app:layout_constraintStart_toEndOf="@id/cardLogo"
+            app:layout_constraintTop_toTopOf="@id/cardLogo"
             tools:text="Senior Android Developer" />
 
+        <!-- Company Name & Meta -->
         <TextView
             android:id="@+id/tvCompany"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="TechCorp Inc. • Full-time"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="#757575"
             android:textSize="13sp"
-            app:layout_constraintEnd_toStartOf="@+id/btnApply"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnBookmark"
+            app:layout_constraintStart_toEndOf="@id/cardLogo"
             app:layout_constraintTop_toBottomOf="@id/tvJobTitle"
             tools:text="TechCorp Inc. • Full-time" />
 
+        <!-- Bookmark / Quick Save Button -->
+        <ImageButton
+            android:id="@+id/btnBookmark"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Save Job"
+            android:src="@android:drawable/btn_star_big_off"
+            app:tint="@color/purple_theme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Salary Display (Aligned horizontally with Apply button) -->
         <TextView
             android:id="@+id/tvSalary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="$90k - $120k / year"
             android:textColor="@color/purple_theme"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnApply"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvCompany"
             tools:text="$90k - $120k / year" />
 
+        <!-- Apply Button (Same row/layer as Salary) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnApply"
             android:layout_width="wrap_content"
             android:layout_height="38dp"
+            android:paddingHorizontal="18dp"
             android:text="Apply"
+            android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:textSize="12sp"
+            android:textSize="13sp"
+            android:textStyle="bold"
             app:backgroundTint="@color/purple_theme"
-            app:cornerRadius="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:cornerRadius="10dp"
+            app:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSalary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/tvSalary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
