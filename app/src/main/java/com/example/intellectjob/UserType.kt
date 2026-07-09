@@ -4,13 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.intellectjob.databinding.ActivitySignUpBinding
 import com.example.intellectjob.databinding.ActivityUserTypeBinding
 
 class UserType : AppCompatActivity() {
     private lateinit var binding: ActivityUserTypeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,10 +27,10 @@ class UserType : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Login Selection
         binding.textLogin.setOnClickListener {
-            val intent = Intent(this, SignIn::class.java)
+            val intent = Intent(this@UserType, SignIn::class.java)
             startActivity(intent)
         }
-
     }
 }

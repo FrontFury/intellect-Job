@@ -5,11 +5,8 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.intellectjob.databinding.ActivityRecruiterHomePageBinding
-import getGreeting
-import java.util.Calendar
+
 
 class RecruiterHomePage : AppCompatActivity() {
     private  lateinit var binding: ActivityRecruiterHomePageBinding
