@@ -6,26 +6,43 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9F9FB"
+    android:background="#F8F9FD"
     tools:context=".ApplyJob">
 
+    <!-- Header Background -->
     <View
         android:id="@+id/headerBackground"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:background="#5B3294"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Top Action Row: Navigation Back Button -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:src="@android:drawable/ic_menu_revert"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF" />
+
+    <!-- Header Title & Subtitle Container -->
     <LinearLayout
         android:id="@+id/headerContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="24dp"
-        app:layout_constraintTop_toTopOf="@id/headerBackground"
-        app:layout_constraintBottom_toBottomOf="@id/headerBackground">
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/headerBackground"
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
 
         <TextView
             android:id="@+id/tvHeaderTitle"
@@ -35,7 +52,7 @@
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold"
-            tools:text="Apply For Senior Android Developer" />
+            tools:text="Senior Android Developer" />
 
         <TextView
             android:id="@+id/tvHeaderCompany"
@@ -43,19 +60,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Company Name"
-            android:textColor="#E0E0E0"
-            android:textSize="16sp"
+            android:textColor="#E0D7F4"
+            android:textSize="15sp"
             tools:text="Tech Solutions Inc." />
     </LinearLayout>
 
+    <!-- Main Scrollable Form Area -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerBackground"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/headerBackground">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,118 +81,161 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- Information Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Full Name *"
-                android:textColor="#5B3294"
-                android:textStyle="bold"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/etFullName"
+            <!-- 1. Full Name Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_input_field"
-                android:hint="John Doe"
-                android:inputType="textPersonName"
-                android:paddingHorizontal="16dp"
-                android:textColor="#1A1A1A"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email Address *"
-                android:textColor="#5B3294"
-                android:textStyle="bold"
-                android:textSize="14sp" />
+                android:layout_marginBottom="16dp"
+                android:hint="Full Name *"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="#5B3294"
+                app:hintTextColor="#5B3294">
 
-            <EditText
-                android:id="@+id/etEmail"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textColor="#1A1A1A"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 2. Email Address Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_input_field"
-                android:hint="johndoe@example.com"
-                android:inputType="textEmailAddress"
-                android:paddingHorizontal="16dp"
-                android:textColor="#1A1A1A"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="Email Address *"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="#5B3294"
+                app:hintTextColor="#5B3294">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#1A1A1A"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 2. Email Address Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="Expected Annual Salary (USD) *"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="#5B3294"
+                app:hintTextColor="#5B3294">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etExpectedSalary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="#1A1A1A"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <!-- 3. Resume Upload Card -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Upload Resume (PDF) *"
                 android:textColor="#5B3294"
-                android:textStyle="bold"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/btnUploadResume"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_upload_area"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📎 Click to upload your resume"
-                    android:textColor="#5B3294"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvFileName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="No file chosen"
-                    android:textColor="#888888"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cover Letter / Message (Optional)"
-                android:textColor="#5B3294"
-                android:textStyle="bold"
-                android:textSize="14sp" />
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
 
-            <EditText
-                android:id="@+id/etCoverLetter"
+                <LinearLayout
+                    android:id="@+id/btnUploadResume"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/bg_upload_area"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📎 Click to upload your resume"
+                        android:textColor="#5B3294"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvFileName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="No file chosen"
+                        android:textColor="#888888"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 4. Cover Letter / Message Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/bg_input_field"
-                android:gravity="top|start"
-                android:hint="Why do you think you are a good fit?"
-                android:inputType="textMultiLine"
-                android:padding="16dp"
-                android:textColor="#1A1A1A"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="28dp"
+                android:hint="Cover Letter / Message (Optional)"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="#5B3294"
+                app:hintTextColor="#5B3294">
 
-            <Button
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCoverLetter"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine"
+                    android:textColor="#1A1A1A"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 5. Submit Application Button -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSubmitApplication"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="56dp"
                 android:backgroundTint="#5B3294"
+                android:elevation="4dp"
                 android:text="Submit Application"
+                android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:cornerRadius="8dp" />
+                app:cornerRadius="12dp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

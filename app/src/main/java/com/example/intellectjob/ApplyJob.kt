@@ -1,5 +1,6 @@
 package com.example.intellectjob
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -15,11 +16,14 @@ class ApplyJob : AppCompatActivity() {
         binding = ActivityApplyJobBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Retrieve data from Intent
+        binding.btnBack.setOnClickListener {
+            val intent = Intent(this@ApplyJob, HomePage::class.java)
+            startActivity(intent)
+        }
+
         val jobTitle = intent.getStringExtra("JOB_TITLE") ?: "Job"
         val companyName = intent.getStringExtra("COMPANY_NAME") ?: "Company"
 
-        // Update UI with dynamic data using the correct IDs from XML
         binding.tvHeaderTitle.text = "Apply For $jobTitle"
         binding.tvHeaderCompany.text = companyName
 
