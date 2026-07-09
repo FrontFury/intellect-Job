@@ -1,20 +1,38 @@
 package com.example.intellectjob
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.intellectjob.databinding.ActivityApplyJobBinding
 
 class ApplyJob : AppCompatActivity() {
+    private lateinit var binding: ActivityApplyJobBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_apply_job)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityApplyJobBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Retrieve data from Intent
+        val jobTitle = intent.getStringExtra("JOB_TITLE") ?: "Job"
+        val companyName = intent.getStringExtra("COMPANY_NAME") ?: "Company"
+
+        // Update UI with dynamic data using the correct IDs from XML
+        binding.tvHeaderTitle.text = "Apply For $jobTitle"
+        binding.tvHeaderCompany.text = companyName
+
+        binding.btnSubmitApplication.setOnClickListener {
+            val fullName = binding.etFullName.text.toString()
+            val email = binding.etEmail.text.toString()
+
+            if (fullName.isNotEmpty() && email.isNotEmpty()) {
+                Toast.makeText(this, "Application submitted for $jobTitle at $companyName", Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

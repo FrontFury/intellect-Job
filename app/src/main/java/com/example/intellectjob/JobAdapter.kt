@@ -1,5 +1,6 @@
 package com.example.intellectjob
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,14 @@ class JobAdapter(private val jobList: List<Job>) : RecyclerView.Adapter<JobAdapt
         holder.binding.tvJobTitle.text = currentJob.title
         holder.binding.tvCompany.text = currentJob.company
         holder.binding.tvSalary.text = currentJob.salary
+
+        holder.binding.btnApply.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ApplyJob::class.java).apply {
+                putExtra("JOB_TITLE", currentJob.title)
+                putExtra("COMPANY_NAME", currentJob.company)
+            }
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
