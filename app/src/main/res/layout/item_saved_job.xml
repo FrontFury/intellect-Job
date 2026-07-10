@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="3dp"
+    app:strokeColor="#E6E6E6"
+    app:strokeWidth="1dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Company Logo -->
+        <ImageView
+            android:id="@+id/imgCompanyLogo"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_circle_light"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_company" />
+
+        <!-- Bookmark Icon -->
+        <ImageButton
+            android:id="@+id/btnBookmark"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_bookmark_filled"
+            app:tint="#5B3294" />
+
+        <!-- Job Title -->
+        <TextView
+            android:id="@+id/tvSavedJobTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/imgCompanyLogo"
+            android:layout_toStartOf="@id/btnBookmark"
+            android:layout_marginStart="12dp"
+            android:text="Senior Android Developer"
+            android:textColor="#212121"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <!-- Company Name -->
+        <TextView
+            android:id="@+id/tvSavedCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvSavedJobTitle"
+            android:layout_toEndOf="@id/imgCompanyLogo"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:text="Pathao Ltd."
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <!-- Location -->
+        <LinearLayout
+            android:id="@+id/locationLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvSavedCompany"
+            android:layout_toEndOf="@id/imgCompanyLogo"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_location"
+                app:tint="#888888" />
+
+            <TextView
+                android:id="@+id/savedlocationLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="Dhaka, Bangladesh"
+                android:textColor="#888888"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/locationLayout"
+            android:layout_marginTop="14dp"
+            android:background="#EEEEEE" />
+
+        <!-- Bottom Info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Salary -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_salary"
+                    app:tint="#5B3294" />
+
+                <TextView
+                    android:id="@+id/tvSavedSalary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="৳45,000 - ৳60,000"
+                    android:textColor="#5B3294"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Saved Date -->
+            <TextView
+                android:id="@+id/tvSavedDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saved 2 days ago"
+                android:textColor="#999999"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

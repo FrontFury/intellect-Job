@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IntellectJob">
         <activity
+            android:name=".SavedJobPage"
+            android:exported="false" />
+        <activity
             android:name=".UserType"
             android:exported="false" />
         <activity

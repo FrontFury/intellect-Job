@@ -58,5 +58,9 @@ class HomePage : AppCompatActivity() {
             finish()
         }
 
+        binding.savedPageView.setOnClickListener {
+            startActivity(Intent(this@HomePage, SavedJobPage::class.java))
+        }
+
     }
 }
