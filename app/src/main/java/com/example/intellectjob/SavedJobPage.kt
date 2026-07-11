@@ -20,6 +20,10 @@ class SavedJobPage : AppCompatActivity() {
         binding = ActivitySavedJobPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.backSaveToHome.setOnClickListener {
+            startActivity(Intent(this@SavedJobPage, HomePage::class.java))
+        }
+
         val savedJobList = listOf(
             SavedJob("Senior Android Developer", "Pathao Ltd.", "Dhaka, Bangladesh", "৳45,000 - ৳60,000"),
             SavedJob("Junior Android Developer", "Brain Station 23", "Dhaka, Bangladesh", "৳30,000 - ৳45,000"),

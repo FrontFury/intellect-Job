@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Company Logo -->
         <ImageView
             android:id="@+id/imgCompanyLogo"
             android:layout_width="56dp"
@@ -25,7 +24,7 @@
             android:scaleType="centerInside"
             android:src="@drawable/ic_company" />
 
-        <!-- Bookmark Icon -->
+
         <ImageButton
             android:id="@+id/btnBookmark"
             android:layout_width="36dp"
@@ -35,7 +34,7 @@
             android:src="@drawable/ic_bookmark_filled"
             app:tint="#5B3294" />
 
-        <!-- Job Title -->
+
         <TextView
             android:id="@+id/tvSavedJobTitle"
             android:layout_width="match_parent"
@@ -50,25 +49,40 @@
             android:maxLines="1"
             android:ellipsize="end" />
 
-        <!-- Company Name -->
-        <TextView
-            android:id="@+id/tvSavedCompany"
+        <LinearLayout
+            android:id="@+id/companyLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvSavedJobTitle"
             android:layout_toEndOf="@id/imgCompanyLogo"
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
-            android:text="Pathao Ltd."
-            android:textColor="#666666"
-            android:textSize="14sp" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <!-- Location -->
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_saved_company"
+                app:tint="#666666" />
+
+            <TextView
+                android:id="@+id/tvSavedCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="Pathao Ltd."
+                android:textColor="#666666"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
         <LinearLayout
             android:id="@+id/locationLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvSavedCompany"
+            android:layout_below="@id/companyLayout"
             android:layout_toEndOf="@id/imgCompanyLogo"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
@@ -90,7 +104,7 @@
                 android:textSize="13sp" />
         </LinearLayout>
 
-        <!-- Divider -->
+
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
@@ -99,7 +113,7 @@
             android:layout_marginTop="14dp"
             android:background="#EEEEEE" />
 
-        <!-- Bottom Info -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,7 +122,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <!-- Salary -->
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -132,7 +146,7 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Saved Date -->
+
             <TextView
                 android:id="@+id/tvSavedDate"
                 android:layout_width="wrap_content"
