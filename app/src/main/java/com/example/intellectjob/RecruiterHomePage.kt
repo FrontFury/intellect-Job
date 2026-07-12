@@ -22,6 +22,11 @@ class RecruiterHomePage : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.btmManageJobs.setOnClickListener {
+            val intent = Intent(this@RecruiterHomePage, ManageJobs::class.java)
+            startActivity(intent)
+        }
+
         val greeting = getGreeting()
         binding.tvRecruiterGreeting?.text = greeting
 

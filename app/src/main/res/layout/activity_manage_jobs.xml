@@ -12,6 +12,7 @@
         android:id="@+id/headerToolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="40dp"
         android:background="#5B3294"
         android:paddingHorizontal="16dp">
 
