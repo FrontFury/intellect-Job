@@ -1,4 +1,4 @@
-package com.example.intellectjob
+package com.example.intellectjob.Adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.intellectjob.Model.Jobs
 import com.example.intellectjob.databinding.ItemJobManageBinding
 
-class JobsAdapter(private var jobList: List<Jobs>) : RecyclerView.Adapter<JobsAdapter.JobsViewHolder>() {
+class JobsAdapter(
+    private var jobList: List<Jobs>,
+    private val onDeleteClick: (String) -> Unit
+) : RecyclerView.Adapter<JobsAdapter.JobsViewHolder>() {
 
     fun updateData(newList: List<Jobs>) {
         jobList = newList
@@ -34,8 +37,9 @@ class JobsAdapter(private var jobList: List<Jobs>) : RecyclerView.Adapter<JobsAd
             binding.tvSalary.text = "৳${job.salary.min} - ৳${job.salary.max}"
             binding.tvVacancies.text = "${job.vacancies} Vacancies"
 
-            // Note: Job status and Posted date could be dynamic if your API provided them
-            // For now, they are static in the XML or you can set them here if available
+            binding.btnDelete.setOnClickListener {
+                onDeleteClick(job._id)
+            }
         }
     }
 }

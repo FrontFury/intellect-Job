@@ -6,9 +6,11 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.intellectjob.Adapter.JobsAdapter
 import com.example.intellectjob.Model.Jobs
 import com.example.intellectjob.Network.RetrofitInstance
 import com.example.intellectjob.databinding.ActivityManageJobsBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,25 +34,64 @@ class ManageJobs : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        adapter = JobsAdapter(emptyList())
+        adapter = JobsAdapter(emptyList()) { jobId ->
+            showDeleteConfirmationDialog(jobId)
+        }
         binding.rvJobs.layoutManager = LinearLayoutManager(this)
         binding.rvJobs.adapter = adapter
+    }
+
+    private fun showDeleteConfirmationDialog(jobId: String) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Confirm Delete")
+            .setMessage("Are you sure you want to delete this job?")
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton("Delete") { dialog, _ ->
+                deleteJob(jobId)
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun fetchJobs() {
         RetrofitInstance.api.getJobs().enqueue(object : Callback<List<Jobs>> {
             override fun onResponse(call: Call<List<Jobs>>, response: Response<List<Jobs>>) {
                 if (response.isSuccessful) {
-                    val jobs = response.body() ?: emptyList()
-                    adapter.updateData(jobs)
+                    val jobs = response.body()
+                    if (jobs.isNullOrEmpty()) {
+                        Toast.makeText(this@ManageJobs, "No jobs found on server", Toast.LENGTH_LONG).show()
+                    } else {
+                        adapter.updateData(jobs)
+                    }
                 } else {
-                    Toast.makeText(this@ManageJobs, "Failed to load jobs", Toast.LENGTH_SHORT).show()
+                    val errorMsg = "Error: ${response.code()} ${response.message()}"
+                    Log.e("ManageJobs", errorMsg)
+                    Toast.makeText(this@ManageJobs, errorMsg, Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<List<Jobs>>, t: Throwable) {
-                Log.e("ManageJobs", "Error: ${t.message}")
-                Toast.makeText(this@ManageJobs, "Error connecting to server", Toast.LENGTH_SHORT).show()
+                Log.e("ManageJobs", "Network Failure: ${t.message}")
+                Toast.makeText(this@ManageJobs, "Connection Error: Check internet or API URL", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun deleteJob(id: String) {
+        RetrofitInstance.api.deleteJob(id).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@ManageJobs, "Job deleted", Toast.LENGTH_SHORT).show()
+                    fetchJobs()
+                } else {
+                    Toast.makeText(this@ManageJobs, "Delete failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(this@ManageJobs, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
