@@ -2,6 +2,7 @@ package com.example.intellectjob
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -56,8 +57,18 @@ class ManageJobs : AppCompatActivity() {
     }
 
     private fun fetchJobs() {
+        // Start Shimmer Animation
+        binding.shimmerView.startShimmer()
+        binding.shimmerView.visibility = View.VISIBLE
+        binding.rvJobs.visibility = View.GONE
+
         RetrofitInstance.api.getJobs().enqueue(object : Callback<List<Jobs>> {
             override fun onResponse(call: Call<List<Jobs>>, response: Response<List<Jobs>>) {
+                // Stop and Hide Shimmer
+                binding.shimmerView.stopShimmer()
+                binding.shimmerView.visibility = View.GONE
+                binding.rvJobs.visibility = View.VISIBLE
+
                 if (response.isSuccessful) {
                     val jobs = response.body()
                     if (jobs.isNullOrEmpty()) {
@@ -73,6 +84,11 @@ class ManageJobs : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<Jobs>>, t: Throwable) {
+                // Stop and Hide Shimmer on Failure too
+                binding.shimmerView.stopShimmer()
+                binding.shimmerView.visibility = View.GONE
+                binding.rvJobs.visibility = View.VISIBLE
+
                 Log.e("ManageJobs", "Network Failure: ${t.message}")
                 Toast.makeText(this@ManageJobs, "Connection Error: Check internet or API URL", Toast.LENGTH_LONG).show()
             }
@@ -94,5 +110,15 @@ class ManageJobs : AppCompatActivity() {
                 Toast.makeText(this@ManageJobs, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerView.startShimmer()
+    }
+
+    override fun onPause() {
+        binding.shimmerView.stopShimmer()
+        super.onPause()
     }
 }

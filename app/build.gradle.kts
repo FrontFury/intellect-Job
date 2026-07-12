@@ -5,14 +5,11 @@ plugins {
 
 android {
     namespace = "com.example.intellectjob"
-    compileSdk {
-        version = release(35)
+    compileSdk = 35
 
-    };
     buildFeatures {
         viewBinding = true
     }
-
 
     defaultConfig {
         applicationId = "com.example.intellectjob"
@@ -57,4 +54,7 @@ dependencies {
 
     implementation("com.github.bumptech.glide:glide:5.0.7")
     annotationProcessor("com.github.bumptech.glide:compiler:5.0.7")
+
+    // Shimmer effect
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
 }
