@@ -1,22 +1,21 @@
 package com.example.intellectjob
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.intellectjob.Adapter.JobsAdapter
-import com.example.intellectjob.Network.RetrofitInstance
+import com.example.intellectjob.ViewModel.ManageJobsViewModel
 import com.example.intellectjob.databinding.ActivityManageJobsBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.launch
 
 class ManageJobs : AppCompatActivity() {
     private lateinit var binding: ActivityManageJobsBinding
     private lateinit var adapter: JobsAdapter
+    private val viewModel: ManageJobsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +24,7 @@ class ManageJobs : AppCompatActivity() {
         setContentView(binding.root)
 
         setupRecyclerView()
-        fetchJobs()
+        observeViewModel()
 
         binding.btnBack.setOnClickListener {
             finish()
@@ -40,6 +39,43 @@ class ManageJobs : AppCompatActivity() {
         binding.rvJobs.adapter = adapter
     }
 
+    private fun observeViewModel() {
+        // Observe jobs list
+        viewModel.jobs.observe(this) { jobs ->
+            if (jobs != null) {
+                adapter.updateData(jobs)
+            }
+        }
+
+        // Observe loading state for shimmer
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                binding.shimmerView.startShimmer()
+                binding.shimmerView.visibility = View.VISIBLE
+                binding.rvJobs.visibility = View.GONE
+            } else {
+                binding.shimmerView.stopShimmer()
+                binding.shimmerView.visibility = View.GONE
+                binding.rvJobs.visibility = View.VISIBLE
+            }
+        }
+
+        // Observe errors
+        viewModel.error.observe(this) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Observe delete status
+        viewModel.deleteStatus.observe(this) { success ->
+            if (success) {
+                Toast.makeText(this, "Job deleted successfully", Toast.LENGTH_SHORT).show()
+                viewModel.resetDeleteStatus()
+            }
+        }
+    }
+
     private fun showDeleteConfirmationDialog(jobId: String) {
         MaterialAlertDialogBuilder(this)
             .setTitle("Confirm")
@@ -48,62 +84,17 @@ class ManageJobs : AppCompatActivity() {
                 dialog.dismiss()
             }
             .setPositiveButton("OK") { dialog, _ ->
-                deleteJob(jobId)
+                viewModel.deleteJob(jobId)
                 dialog.dismiss()
             }
             .show()
     }
 
-    private fun fetchJobs() {
-        // Start Shimmer Animation
-        binding.shimmerView.startShimmer()
-        binding.shimmerView.visibility = View.VISIBLE
-        binding.rvJobs.visibility = View.GONE
-
-        lifecycleScope.launch {
-            try {
-                val jobs = RetrofitInstance.api.getJobs()
-
-                binding.shimmerView.stopShimmer()
-                binding.shimmerView.visibility = View.GONE
-                binding.rvJobs.visibility = View.VISIBLE
-
-                if (jobs.isEmpty()) {
-                    Toast.makeText(this@ManageJobs, "No jobs found on server", Toast.LENGTH_LONG).show()
-                } else {
-                    adapter.updateData(jobs)
-                }
-            } catch (e: Exception) {
-                binding.shimmerView.stopShimmer()
-                binding.shimmerView.visibility = View.GONE
-                binding.rvJobs.visibility = View.VISIBLE
-
-                Log.e("ManageJobs", "Network Failure: ${e.message}")
-                Toast.makeText(this@ManageJobs, "Connection Error", Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
-    private fun deleteJob(id: String) {
-        lifecycleScope.launch {
-            try {
-                val response = RetrofitInstance.api.deleteJob(id)
-                if (response.isSuccessful) {
-                    Toast.makeText(this@ManageJobs, "Job deleted", Toast.LENGTH_SHORT).show()
-                    fetchJobs()
-                } else {
-                    Toast.makeText(this@ManageJobs, "Delete failed: ${response.code()}", Toast.LENGTH_SHORT).show()
-                }
-            } catch (e: Exception) {
-                Log.e("ManageJobs", "Delete Error: ${e.message}")
-                Toast.makeText(this@ManageJobs, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
     override fun onResume() {
         super.onResume()
-        binding.shimmerView.startShimmer()
+        if (viewModel.isLoading.value == true) {
+            binding.shimmerView.startShimmer()
+        }
     }
 
     override fun onPause() {
