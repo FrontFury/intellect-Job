@@ -14,6 +14,7 @@ import com.example.intellectjob.Adapter.JobsAdapter
 import com.example.intellectjob.ViewModel.ManageJobsViewModel
 import com.example.intellectjob.databinding.ActivityManageJobsBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.Gson
 
 class ManageJobs : AppCompatActivity() {
     private lateinit var binding: ActivityManageJobsBinding
@@ -41,9 +42,17 @@ class ManageJobs : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        adapter = JobsAdapter(emptyList()) { jobId ->
-            showDeleteConfirmationDialog(jobId)
-        }
+        adapter = JobsAdapter(
+            jobList = emptyList(),
+            onDeleteClick = { jobId ->
+                showDeleteConfirmationDialog(jobId)
+            },
+            onUpdateClick = { job ->
+                val intent = Intent(this, UpdateJob::class.java)
+                intent.putExtra("JOB_DATA", Gson().toJson(job))
+                startActivity(intent)
+            }
+        )
         binding.rvJobs.layoutManager = LinearLayoutManager(this)
         binding.rvJobs.adapter = adapter
     }
@@ -114,6 +123,8 @@ class ManageJobs : AppCompatActivity() {
         if (viewModel.isLoading.value == true) {
             binding.shimmerView.startShimmer()
         }
+        // Refresh data when returning from UpdateJob
+        viewModel.fetchJobs()
     }
 
     override fun onPause() {

@@ -8,7 +8,8 @@ import com.example.intellectjob.databinding.ItemJobManageBinding
 
 class JobsAdapter(
     private var jobList: List<Jobs>,
-    private val onDeleteClick: (String) -> Unit
+    private val onDeleteClick: (String) -> Unit,
+    private val onUpdateClick: (Jobs) -> Unit
 ) : RecyclerView.Adapter<JobsAdapter.JobsViewHolder>() {
 
     fun updateData(newList: List<Jobs>) {
@@ -39,6 +40,10 @@ class JobsAdapter(
 
             binding.btnDelete.setOnClickListener {
                 onDeleteClick(job._id)
+            }
+
+            binding.btnUpdate.setOnClickListener {
+                onUpdateClick(job)
             }
         }
     }
