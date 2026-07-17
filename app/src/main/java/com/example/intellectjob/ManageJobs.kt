@@ -1,6 +1,9 @@
 package com.example.intellectjob
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -25,9 +28,15 @@ class ManageJobs : AppCompatActivity() {
 
         setupRecyclerView()
         observeViewModel()
+        setupSearch()
 
         binding.btnBack.setOnClickListener {
             finish()
+        }
+
+        binding.fabAddJob.setOnClickListener {
+            val intent = Intent(this@ManageJobs, CreateJob::class.java)
+            startActivity(intent)
         }
     }
 
@@ -37,6 +46,16 @@ class ManageJobs : AppCompatActivity() {
         }
         binding.rvJobs.layoutManager = LinearLayoutManager(this)
         binding.rvJobs.adapter = adapter
+    }
+
+    private fun setupSearch() {
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.filterJobs(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     private fun observeViewModel() {
